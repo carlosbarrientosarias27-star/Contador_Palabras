@@ -56,8 +56,7 @@ python src/main.py --archivo texto/informe.txt
 ## 2. Ejemplo de Salida en Terminal
 Al ejecutar el comando anterior, verás un resumen como este:
 
-Plaintext
->>> Analizando: informe.txt
+- Analizando: informe.txt
 -----------------------------------
 Palabras totales: 450
 Caracteres (sin espacios): 2,100
@@ -68,7 +67,7 @@ Top 3 palabras más frecuentes:
 1. "desarrollo" (12 veces)
 2. "sistema" (8 veces)
 3. "análisis" (5 veces)
-3. Ejecutar Pruebas Unitarias
+
 Si deseas verificar que todos los módulos funcionan correctamente:
 
 Bash
