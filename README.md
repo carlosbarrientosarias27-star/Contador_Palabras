@@ -58,12 +58,11 @@ Al ejecutar el comando anterior, verás un resumen como este:
 
 📊 Resumen de Estadísticas: informe.txt
 
-Métrica	                Resultado
-Palabras totales	        450
-Caracteres (sin espacios)	2,100
-Párrafos detectados	        5
-Tiempo estimado de lectura	2 min 15 seg 
-
+Métrica	Resultado
+Palabras totales	450
+Caracteres (sin espacios)	2,1
+Párrafos detectados	5
+Tiempo estimado de lectura	2 min 15 seg
 
 🔝 Top 3 Palabras más Frecuentes
 
