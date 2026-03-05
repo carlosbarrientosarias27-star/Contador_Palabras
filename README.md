@@ -6,13 +6,13 @@ Contador de Palabras de Texto es una herramienta en Python diseñada para analiz
 
 ## 🎯 Objetivos del Proyecto
 
-   Precisión: Contabilizar palabras ignorando ruidos como espacios múltiples o signos de puntuación.
+- Precisión: Contabilizar palabras ignorando ruidos como espacios múltiples o signos de puntuación.
 
-   Análisis profundo: Proveer métricas de caracteres (con/sin espacios), oraciones y párrafos.
+- Análisis profundo: Proveer métricas de caracteres (con/sin espacios), oraciones y párrafos.
 
-   Frecuencia: Identificar las palabras más utilizadas y la densidad del texto.
+- Frecuencia: Identificar las palabras más utilizadas y la densidad del texto.
 
-   Eficiencia: Procesar archivos extensos sin degradar el rendimiento del sistema.
+- Eficiencia: Procesar archivos extensos sin degradar el rendimiento del sistema.
 ---
 
 ## ✨ Funcionalidades
