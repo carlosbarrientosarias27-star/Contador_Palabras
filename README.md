@@ -32,13 +32,13 @@ Contador de Palabras de Texto es una herramienta en Python diseñada para analiz
 ## 🚀 Instalación
 Asegúrate de tener Python 3.x instalado en tu sistema.
 
-# 1. Clonar el repositorio
+## 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/CONTADOR_PALABRAS.git
 
-# 2. Entrar al directorio
+## 2. Entrar al directorio
 cd CONTADOR_PALABRAS
 
-# 3. Instalar dependencias (si aplica)
+## 3. Instalar dependencias (si aplica)
 pip install -r requirements.txt
 
 ---
@@ -47,13 +47,13 @@ pip install -r requirements.txt
 
 El punto de entrada principal del programa es src/main.py.
 
-### 1. Ejecución Básica
+## 1. Ejecución Básica
 Para analizar uno de los archivos de texto incluidos en la carpeta texto/:
 
 Bash
 python src/main.py --archivo texto/informe.txt
 
-### 2. Ejemplo de Salida en Terminal
+## 2. Ejemplo de Salida en Terminal
 Al ejecutar el comando anterior, verás un resumen como este:
 
 Plaintext
