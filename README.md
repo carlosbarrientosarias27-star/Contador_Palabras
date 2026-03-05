@@ -56,17 +56,21 @@ python src/main.py --archivo texto/informe.txt
 ## 2. Ejemplo de Salida en Terminal
 Al ejecutar el comando anterior, verás un resumen como este:
 
-- Analizando: informe.txt
------------------------------------
-Palabras totales: 450
-Caracteres (sin espacios): 2,100
-Párrafos detectados: 5
-Tiempo estimado de lectura: 2 min 15 seg
------------------------------------
-Top 3 palabras más frecuentes:
-1. "desarrollo" (12 veces)
-2. "sistema" (8 veces)
-3. "análisis" (5 veces)
+📊 Resumen de Estadísticas: informe.txt
+
+Métrica	                Resultado
+Palabras totales	        450
+Caracteres (sin espacios)	2,100
+Párrafos detectados	        5
+Tiempo estimado de lectura	2 min 15 seg 
+
+
+🔝 Top 3 Palabras más Frecuentes
+
+Rango   Palabra        Frecuencia
+1°      "desarrollo"   12 veces
+2°      "sistema"      8 veces
+3°      "análisis"     5 veces
 
 Si deseas verificar que todos los módulos funcionan correctamente:
 
