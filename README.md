@@ -65,7 +65,7 @@ Al ejecutar el comando anterior, verás un resumen como este:
 | **Párrafos detectados** | 5 |
 | **Tiempo estimado de lectura** | 2 min 15 seg |
 
-##🔝 Top 3 Palabras más Frecuentes
+## 📊 🔝 Top 3 Palabras más Frecuentes
 
 | Rango | Palabra | Frecuencia |
 | :---: | :--- | :--- |
