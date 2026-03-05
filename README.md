@@ -1,45 +1,18 @@
 # 📝 Contador de Palabras de Texto
 
-![Version](https://img.shields.io/badge/versión-1.0.0-blue)
-![License](https://img.shields.io/badge/licencia-MIT-green)
-![Status](https://img.shields.io/badge/estado-activo-brightgreen)
-
 ## Descripción
 
-**Contador de Palabras de Texto** es una herramienta diseñada para analizar y procesar texto de forma rápida y precisa. Permite a los usuarios obtener estadísticas detalladas sobre cualquier contenido textual: palabras, caracteres, oraciones, párrafos y mucho más, sin necesidad de instalaciones complejas ni conocimientos técnicos avanzados.
-
-Ideal para escritores, estudiantes, traductores, periodistas y cualquier persona que trabaje con texto de forma habitual.
-
----
+Contador de Palabras de Texto es una herramienta en Python diseñada para analizar y procesar texto de forma rápida y precisa. Permite obtener estadísticas detalladas sobre palabras, caracteres, oraciones y frecuencia de términos, facilitando el trabajo de escritores, estudiantes y editores.
 
 ## 🎯 Objetivos del Proyecto
 
-### Objetivo General
-Proporcionar una herramienta accesible, precisa y eficiente para el análisis estadístico de texto, que ayude a los usuarios a comprender y medir la extensión y complejidad de sus contenidos.
+   Precisión: Contabilizar palabras ignorando ruidos como espacios múltiples o signos de puntuación.
 
-### Objetivos Específicos
+   Análisis profundo: Proveer métricas de caracteres (con/sin espacios), oraciones y párrafos.
 
-1. **Contar palabras con precisión**  
-   Detectar y contabilizar correctamente las palabras de un texto, ignorando espacios múltiples, saltos de línea y signos de puntuación.
+   Frecuencia: Identificar las palabras más utilizadas y la densidad del texto.
 
-2. **Analizar caracteres**  
-   Ofrecer el conteo de caracteres totales, con y sin espacios, para adaptarse a distintos requisitos editoriales o de plataforma.
-
-3. **Estadísticas adicionales**  
-   Calcular el número de oraciones, párrafos y la frecuencia de palabras más usadas dentro del texto.
-
-4. **Tiempo estimado de lectura**  
-   Estimar el tiempo de lectura promedio basado en la cantidad de palabras (velocidad estándar: ~200 palabras por minuto).
-
-5. **Soporte multilenguaje**  
-   Funcionar correctamente con textos en español, inglés y otros idiomas con caracteres especiales (tildes, ñ, ü, etc.).
-
-6. **Interfaz intuitiva y accesible**  
-   Ofrecer una experiencia de usuario clara, sin curva de aprendizaje, accesible desde navegador o línea de comandos.
-
-7. **Rendimiento con textos largos**  
-   Procesar documentos extensos (libros, informes, artículos) de forma eficiente sin pérdida de rendimiento.
-
+   Eficiencia: Procesar archivos extensos sin degradar el rendimiento del sistema.
 ---
 
 ## ✨ Funcionalidades
@@ -57,50 +30,79 @@ Proporcionar una herramienta accesible, precisa y eficiente para el análisis es
 ---
 
 ## 🚀 Instalación
+Asegúrate de tener Python 3.x instalado en tu sistema.
 
-```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/contador-palabras.git
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/CONTADOR_PALABRAS.git
 
-# Entrar al directorio
-cd contador-palabras
+# 2. Entrar al directorio
+cd CONTADOR_PALABRAS
 
-# Instalar dependencias
-npm install
-```
+# 3. Instalar dependencias (si aplica)
+pip install -r requirements.txt
 
 ---
 
-## 🛠️ Uso
+## 🛠️ Uso y Ejemplos de Ejecución
 
-```bash
-# Ejecutar con un archivo de texto
-node index.js --archivo mi_texto.txt
+El punto de entrada principal del programa es src/main.py.
 
-# Analizar texto directamente desde la terminal
-node index.js --texto "Escribe tu texto aquí"
+### 1. Ejecución Básica
+Para analizar uno de los archivos de texto incluidos en la carpeta texto/:
 
-# Ver todas las opciones disponibles
-node index.js --ayuda
-```
+Bash
+python src/main.py --archivo texto/informe.txt
+
+### 2. Ejemplo de Salida en Terminal
+Al ejecutar el comando anterior, verás un resumen como este:
+
+Plaintext
+>>> Analizando: informe.txt
+-----------------------------------
+Palabras totales: 450
+Caracteres (sin espacios): 2,100
+Párrafos detectados: 5
+Tiempo estimado de lectura: 2 min 15 seg
+-----------------------------------
+Top 3 palabras más frecuentes:
+1. "desarrollo" (12 veces)
+2. "sistema" (8 veces)
+3. "análisis" (5 veces)
+3. Ejecutar Pruebas Unitarias
+Si deseas verificar que todos los módulos funcionan correctamente:
+
+Bash
+pytest test/
 
 ---
 
 ## 📁 Estructura del Proyecto
 
 ```
-contador-palabras/
-├── src/
-│   ├── contador.js       # Lógica principal de conteo
-│   ├── analizador.js     # Análisis estadístico
-│   └── utils.js          # Funciones auxiliares
-├── tests/
-│   └── contador.test.js  # Pruebas unitarias
-├── examples/
-│   └── ejemplo.txt       # Texto de muestra
-├── index.js              # Punto de entrada
-├── package.json
-└── README.md
+CONTADOR_PALABRAS/
+├── .qodo/                 # Configuración de herramientas de IA/Agentes
+├── docs/                  # Documentación del proyecto
+│   ├── asistencia_ia.md
+│   └── caso edge.md
+├── src/                   # Código fuente principal
+│   ├── __init__.py
+│   ├── analizador.py      # Lógica de conteo y procesamiento
+│   ├── exportador.py      # Generación de reportes (CSV, JSON, etc.)
+│   ├── lector.py          # Manejo de apertura de archivos (.txt, .pdf)
+│   └── main.py            # Punto de entrada de la aplicación
+├── tests/                 # Pruebas unitarias e integración
+│   ├── __init__.py
+│   ├── test_analizador.py
+│   ├── test_exportador.py
+│   ├── test_lector.py
+│   └── test_main.py
+├── data/                  # Carpeta para archivos de entrada/salida (antes 'texto')
+│   ├── inputs/            # Archivos a procesar (ejemplos.txt)
+│   └── outputs/           # Resultados generados (informe.txt)
+├── .gitignore             # Archivos que Git debe ignorar (ej. __pycache__)
+├── LICENSE                # Licencia del software
+├── README.md              # Descripción general y cómo usar el proyecto
+└── requirements.txt       # Librerías externas necesarias
 ```
 
 ---
@@ -122,5 +124,3 @@ Las contribuciones son bienvenidas. Por favor, abre un *issue* para discutir cam
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
-
-> Desarrollado con ❤️ para facilitar el trabajo con texto cotidiano.

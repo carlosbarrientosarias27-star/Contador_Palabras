@@ -72,5 +72,6 @@ class TestAnalizador(unittest.TestCase):
         texto_simbolos = "!!! ???"
         self.assertIsNone(calcular_estadisticas_avanzadas(texto_simbolos))
 
+
 if __name__ == '__main__':
     unittest.main()
