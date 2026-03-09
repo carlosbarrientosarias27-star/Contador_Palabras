@@ -2,76 +2,65 @@ import unittest
 import sys
 import os
 
-# 1. Obtenemos la ruta absoluta de donde está ESTE archivo de test
-directorio_test = os.path.dirname(os.path.abspath(__file__))
+# 1. Configuración de rutas para encontrar 'src'
+directorio_src = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+if directorio_src not in sys.path:
+    sys.path.insert(0, directorio_src)
 
-# 2. Subimos un nivel para llegar a la raíz (Contador_Palabras)
-ruta_raiz = os.path.join(directorio_test, '..')
-
-# 3. La insertamos al principio del path
-sys.path.insert(0, os.path.abspath(ruta_raiz))
-
-# Ahora la importación debería funcionar sin problemas
-from src.analizador import (
-    analizar_conteo_basico, 
-    analizar_estructuras, 
-    obtener_frecuencia_palabras, 
-    calcular_estadisticas_avanzadas
+# 2. Importación de las funciones del analizador
+from analizador import (
+    limpiar_palabras, 
+    contar_estadisticas_basicas, 
+    analizar_estructura, 
+    analizar_vocabulario
 )
 
-class TestAnalizador(unittest.TestCase):
+class TestAnalizadorTexto(unittest.TestCase):
 
     def setUp(self):
-        """Texto de ejemplo para las pruebas."""
-        self.texto_simple = "Hola mundo. Esto es una prueba! Funciona?"
-        self.texto_vacio = "   "
+        """Configuración de datos de prueba comunes"""
+        self.texto_simple = "Hola mundo. Esto es una prueba!"
+        self.palabras_simple = ["hola", "mundo", "esto", "es", "una", "prueba"]
 
-    # --- Pruebas: analizar_conteo_basico ---
-    def test_conteo_basico_exito(self):
-        palabras, con_espacios, sin_espacios = analizar_conteo_basico("Hola mundo")
-        self.assertEqual(palabras, 2)
-        self.assertEqual(con_espacios, 10)
-        self.assertEqual(sin_espacios, 9)
+    def test_limpiar_palabras(self):
+        """Verifica que se elimine puntuación y se pase a minúsculas"""
+        texto = "¡Hola, MUNDO! ¿Python?"
+        resultado = limpiar_palabras(texto)
+        self.assertEqual(resultado, ["hola", "mundo", "python"])
 
-    def test_conteo_basico_vacio(self):
-        self.assertEqual(analizar_conteo_basico(self.texto_vacio), (0, 0, 0))
+    def test_contar_estadisticas_basicas(self):
+        """Verifica el conteo de palabras y caracteres"""
+        # "hola mundo" -> 10 char con espacio, 9 sin espacio, 2 palabras
+        total_p, c_con, c_sin, l_med = contar_estadisticas_basicas("hola mundo", ["hola", "mundo"])
+        self.assertEqual(total_p, 2)
+        self.assertEqual(c_con, 10)
+        self.assertEqual(c_sin, 9)
+        self.assertEqual(l_med, 4.5) # (4+5)/2
 
-    # --- Pruebas: analizar_estructuras ---
-    def test_estructuras_exito(self):
-        # 3 oraciones (. ! ?), 2 párrafos
-        texto = "Primera oración.\nSegunda oración! Tercera?"
-        oraciones, parrafos = analizar_estructuras(texto)
+    def test_analizar_estructura(self):
+        """Verifica el conteo de oraciones y párrafos"""
+        texto = "Primera oración. Segunda oración!\n\nSegundo párrafo."
+        oraciones, parrafos = analizar_estructura(texto)
         self.assertEqual(oraciones, 3)
         self.assertEqual(parrafos, 2)
 
-    def test_estructuras_vacio(self):
-        self.assertEqual(analizar_estructuras(None), (0, 0))
+    def test_analizar_vocabulario_extremos(self):
+        """Verifica identificación de palabra más larga y corta"""
+        palabras = ["ia", "tecnologia", "programacion"]
+        unicas, porc, larga, corta = analizar_vocabulario(palabras)
+        self.assertEqual(larga, "programacion")
+        self.assertEqual(corta, "ia")
+        self.assertEqual(unicas, 3)
 
-    # --- Pruebas: obtener_frecuencia_palabras ---
-    def test_frecuencia_filtrado_stopwords(self):
-        # 'el' y 'la' son stopwords y deben ignorarse
-        texto = "el perro corre la calle el perro"
-        resultado = obtener_frecuencia_palabras(texto)
-        # Debería quedar: [('perro', 2), ('corre', 1), ('calle', 1)]
-        self.assertEqual(resultado[0], ('perro', 2))
-        self.assertNotIn('el', [palabra for palabra, cuenta in resultado])
+    def test_casos_vacios(self):
+        """Prueba el comportamiento con listas o textos vacíos"""
+        total_p, _, _, l_med = contar_estadisticas_basicas("", [])
+        self.assertEqual(total_p, 0)
+        self.assertEqual(l_med, 0)
+        
+        _, _, larga, corta = analizar_vocabulario([])
+        self.assertEqual(larga, "N/A")
+        self.assertEqual(corta, "N/A")
 
-    # --- Pruebas: calcular_estadisticas_avanzadas ---
-    def test_estadisticas_avanzadas_exito(self):
-        texto = "Python es genial"
-        stats = calcular_estadisticas_avanzadas(texto)
-        self.assertIsNotNone(stats)
-        self.assertEqual(stats["unicas"], 3)
-        self.assertEqual(stats["mas_larga"], "python")
-        # (6+2+6) / 3 = 4.66...
-        self.assertAlmostEqual(stats["media_longitud"], 4.67, places=2)
-
-    def test_estadisticas_avanzadas_division_cero(self):
-        """Verifica que la protección contra división por cero funcione."""
-        # Un texto con solo símbolos no genera palabras en re.findall(r'\b\w+\b')
-        texto_simbolos = "!!! ???"
-        self.assertIsNone(calcular_estadisticas_avanzadas(texto_simbolos))
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
