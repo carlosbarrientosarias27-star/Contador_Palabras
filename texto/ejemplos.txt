@@ -1,2 +1,0 @@
-"Python es un lenguaje de programación versátil. Es muy popular en ciencia de 
-datos e IA. Este archivo sirve para probar la carga de archivos externos." 

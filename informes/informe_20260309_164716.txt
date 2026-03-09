@@ -1,0 +1,14 @@
+========================================
+      INFORME DE ANÁLISIS DE TEXTO      
+========================================
+
+📅 Fecha y Hora: 09/03/2026 16:47:16
+📂 Fuente: textos/ejemplo.txt
+----------------------------------------
+🔹 Total caracteres: 192
+🔹 Total palabras: 31
+🔹 Lineas: 4
+🔹 Palabra mas larga: fundamental.
+
+========================================
+Fin del informe.

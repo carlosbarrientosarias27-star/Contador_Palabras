@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-def generar_informe(datos_analisis, fuente="Manual"):
+def guardar_informe(datos_analisis, fuente="Manual"):
     """
     Guarda los resultados del análisis en un archivo .txt con metadatos.
     
@@ -10,14 +10,14 @@ def generar_informe(datos_analisis, fuente="Manual"):
     """
     ahora = datetime.now()
     fecha_str = ahora.strftime("%d/%m/%Y %H:%M:%S")
-    nombre_texto = f"informe_{ahora.strftime('%Y%m%d_%H%M%S')}.txt"
-    ruta_salida = os.path.join("informes", nombre_texto)
+    nombre_informe = f"informe_{ahora.strftime('%Y%m%d_%H%M%S')}.txt"
+    ruta_confirmada = os.path.join("informes", nombre_informe)
 
     # Crear carpeta de informes si no existe
     os.makedirs("informes", exist_ok=True)
 
     try:
-        with open(ruta_salida, "w", encoding="utf-8") as f:
+        with open(ruta_confirmada, "w", encoding="utf-8") as f:
             f.write("========================================\n")
             f.write("      INFORME DE ANÁLISIS DE TEXTO      \n")
             f.write("========================================\n\n")
@@ -32,8 +32,8 @@ def generar_informe(datos_analisis, fuente="Manual"):
             f.write("\n" + "=" * 40 + "\n")
             f.write("Fin del informe.\n")
 
-        print(f"\n✅ Informe guardado con éxito en: {ruta_salida}")
-        return ruta_salida
+        print(f"\n✅ Informe guardado con éxito en: {ruta_confirmada}")
+        return ruta_confirmada
 
     except Exception as e:
         print(f"❌ Error al guardar el informe: {e}")
@@ -43,6 +43,6 @@ def preguntar_guardado(datos, fuente="Manual"):
     """Consulta al usuario si desea exportar los resultados."""
     opcion = input("\n¿Desea guardar el informe de análisis en un archivo? (s/n): ").lower()
     if opcion == 's':
-        generar_informe(datos, fuente)
+        guardar_informe(datos, fuente)
     else:
         print("ℹ️ Informe no guardado.")

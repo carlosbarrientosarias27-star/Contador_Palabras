@@ -1,62 +1,91 @@
 import os
-import platform
-from src.lector_archivos import leer_archivo, ejecutar_analisis_completo
-# En la parte superior de main.py
-from src.exportador import guardar_informe, preguntar_guardado # Agrega preguntar_guardado
+from lector_archivos import leer_archivo, crear_archivo_ejemplo
+from exportador import guardar_informe
 
 def limpiar_pantalla():
-    """Limpia la terminal según el sistema operativo."""
-    if platform.system() == "Windows":
-        os.system('cls')
-    else:
-        os.system('clear')
+    """Limpiar la terminal entre operaciones con os.system()"""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def mostrar_bienvenida():
-    """Muestra el banner principal del programa."""
+    """Mostrar pantalla de bienvenida con el título del programa al iniciar"""
     print("========================================")
-    print("      SISTEMA DE ANÁLISIS DE TEXTO      ")
-    print("========================================")
-    print("Bienvenido/a. Seleccione una opción para comenzar.\n")
+    print("      ANALIZADOR DE TEXTO PRO v1.0     ")
+    print("========================================\n")
+
+def realizar_analisis(texto):
+    """Aplica funciones de análisis al texto del archivo o manual"""
+    palabras = texto.split()
+    return {
+        "total_caracteres": len(texto),
+        "total_palabras": len(palabras),
+        "total_lineas": len(texto.splitlines()),
+        "palabra_mas_larga": max(palabras, key=len) if palabras else "N/A"
+    }
 
 def menu_principal():
+    # Definimos la ruta fija para el archivo de prueba
+    ruta_ejemplo = "textos/ejemplo.txt" 
+    
+    # Crear el archivo textos/ejemplo.txt con un texto de prueba de varias líneas
+    if not os.path.exists(ruta_ejemplo):
+        crear_archivo_ejemplo(ruta_ejemplo)
+
+    # Implementar bucle principal que mantenga el menú activo
     while True:
         limpiar_pantalla()
         mostrar_bienvenida()
         
-        print("1. Analizar texto manual (Ingreso por teclado)")
+        # Crear menú principal con tres opciones
+        print("1. Analizar texto manual")
         print("2. Analizar archivo (.txt)")
         print("3. Salir")
-        print("-" * 40)
         
-        opcion = input("Seleccione una opción (1-3): ")
+        opcion = input("\nSeleccione una opción: ")
+        texto_a_analizar = ""
+        fuente = ""
 
         if opcion == "1":
-            limpiar_pantalla()
-            print("--- ANALIZADOR MANUAL ---")
-            texto_usuario = input("\nIngrese el texto que desea analizar:\n> ")
-            if texto_usuario.strip():
-                # Aquí llamarías a tus funciones de análisis (ej. contar_palabras(texto_usuario))
-                print("\n[Simulación] Analizando texto manual...")
-                print(f"Longitud del texto: {len(texto_usuario)} caracteres.")
-            else:
-                print("\n⚠️ No ingresaste ningún texto.")
-            input("\nPresione Enter para volver al menú...")
-
+            texto_a_analizar = input("\nIngrese el texto a analizar: ")
+            fuente = "Entrada Manual"
+        
         elif opcion == "2":
-            limpiar_pantalla()
-            print("--- ANALIZADOR DE ARCHIVOS ---")
-            ruta = input("\nIngrese la ruta del archivo (ej: textos/ejemplo.txt):\n> ")
-            # Ejecutamos la función que creamos en el commit anterior
-            ejecutar_analisis_completo(ruta)
-            input("\nPresione Enter para volver al menú...")
+            ruta_usuario = input("\nIngrese la ruta del archivo (ej: textos/ejemplo.txt): ")
+            try:
+                # Carga y lee un archivo .txt dado su ruta con manejo de errores
+                texto_a_analizar = leer_archivo(ruta_usuario)
+                fuente = ruta_usuario
+            except FileNotFoundError:
+                print("⚠️ Error: Archivo no encontrado.")
+            except EOFError:
+                print("⚠️ Error: El archivo está vacío.")
+            except ValueError as e:
+                print(f"⚠️ Error de formato: {e}")
+            except Exception as e:
+                print(f"⚠️ Error inesperado: {e}")
 
         elif opcion == "3":
-            print("\n¡Gracias por usar el Analizador de Texto! Saliendo...")
+            print("Saliendo del programa...")
             break
-
         else:
-            print("\n❌ Opción no válida. Intente de nuevo.")
-            input("Presione Enter para continuar...")
+            print("Opción no válida.")
+        
+        # Si hay texto cargado, procedemos al análisis y guardado
+        if texto_a_analizar:
+            resultados = realizar_analisis(texto_a_analizar)
+            print("\n📊 ESTADÍSTICAS ENCONTRADAS:")
+            for clave, valor in resultados.items():
+                print(f"- {clave.replace('_', ' ').capitalize()}: {valor}")
+            
+            # Preguntar al usuario si quiere guardar el informe de análisis
+            desea_guardar = input("\n¿Desea guardar el informe? (s/n): ").lower()
+            if desea_guardar == 's':
+                # Escribir todos los resultados en un archivo informe.txt (incluye fecha, hora y fuente)
+                ruta_confirmada = guardar_informe(resultados, fuente)
+                if ruta_confirmada:
+                    # Confirmar al usuario la ruta donde se ha guardado el archivo
+                    print(f"✅ Informe guardado con éxito en: {os.path.abspath(ruta_confirmada)}")
+        
+        input("\nPresione Enter para continuar...")
 
 if __name__ == "__main__":
     menu_principal()

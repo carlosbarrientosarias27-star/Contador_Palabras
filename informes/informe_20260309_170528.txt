@@ -1,0 +1,14 @@
+========================================
+      INFORME DE ANÁLISIS DE TEXTO      
+========================================
+
+📅 Fecha y Hora: 09/03/2026 17:05:28
+📂 Fuente: Entrada Manual
+----------------------------------------
+🔹 Total caracteres: 13
+🔹 Total palabras: 1
+🔹 Total lineas: 1
+🔹 Palabra mas larga: Transformador
+
+========================================
+Fin del informe.
