@@ -8,7 +8,7 @@ ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, ruta_raiz)
 
 # Ahora ya puedes importar desde src
-from src.lector import leer_terminal, leer_archivo
+from src.lector_archivos import leer_terminal, leer_archivo
 class TestLector(unittest.TestCase):
 
     # --- Pruebas para leer_terminal ---
