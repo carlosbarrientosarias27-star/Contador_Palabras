@@ -1,0 +1,14 @@
+========================================
+      INFORME DE ANÁLISIS DE TEXTO      
+========================================
+
+📅 Fecha y Hora: 09/03/2026 17:28:10
+📂 Fuente: Entrada Manual
+----------------------------------------
+🔹 Total caracteres: 8
+🔹 Total palabras: 1
+🔹 Total lineas: 1
+🔹 Palabra mas larga: palomita
+
+========================================
+Fin del informe.

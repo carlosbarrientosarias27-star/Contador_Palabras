@@ -1,0 +1,14 @@
+========================================
+      INFORME DE ANÁLISIS DE TEXTO      
+========================================
+
+📅 Fecha y Hora: 09/03/2026 17:30:47
+📂 Fuente: informes/informe_20260309_172810.txt
+----------------------------------------
+🔹 Total caracteres: 375
+🔹 Total palabras: 39
+🔹 Total lineas: 14
+🔹 Palabra mas larga: ========================================
+
+========================================
+Fin del informe.

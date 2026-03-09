@@ -14,28 +14,44 @@ def mostrar_bienvenida():
 
 def realizar_analisis(texto):
     """Aplica funciones de análisis al texto del archivo o manual"""
+    # Caso Edge: Texto que solo contiene espacios, tabs o saltos de línea
+    if not texto or not texto.strip():
+        return {
+            "total_caracteres": len(texto),
+            "total_palabras": 0,
+            "total_lineas": 0,
+            "palabra_mas_larga": "N/A"
+        }
+
     palabras = texto.split()
+    
+    # Caso Edge: Limpiar puntuación para que "Hola!" cuente como "Hola" (4 caracteres)
+    # Esto evita que los signos influyan en cuál es la palabra más larga.
+    palabras_limpias = [p.strip(".,!?;:()[]\"'") for p in palabras]
+    # Filtramos por si al limpiar quedaron strings vacíos (ej: el texto era solo "!!!")
+    palabras_reales = [p for p in palabras_limpias if p]
+
     return {
         "total_caracteres": len(texto),
         "total_palabras": len(palabras),
         "total_lineas": len(texto.splitlines()),
-        "palabra_mas_larga": max(palabras, key=len) if palabras else "N/A"
+        "palabra_mas_larga": max(palabras_reales, key=len) if palabras_reales else "N/A"
     }
 
 def menu_principal():
-    # Definimos la ruta fija para el archivo de prueba
     ruta_ejemplo = "textos/ejemplo.txt" 
     
-    # Crear el archivo textos/ejemplo.txt con un texto de prueba de varias líneas
+    # Asegurar que el directorio existe antes de intentar crear el archivo
+    if not os.path.exists("textos"):
+        os.makedirs("textos")
+
     if not os.path.exists(ruta_ejemplo):
         crear_archivo_ejemplo(ruta_ejemplo)
 
-    # Implementar bucle principal que mantenga el menú activo
     while True:
         limpiar_pantalla()
         mostrar_bienvenida()
         
-        # Crear menú principal con tres opciones
         print("1. Analizar texto manual")
         print("2. Analizar archivo (.txt)")
         print("3. Salir")
@@ -45,21 +61,26 @@ def menu_principal():
         fuente = ""
 
         if opcion == "1":
-            texto_a_analizar = input("\nIngrese el texto a analizar: ")
-            fuente = "Entrada Manual"
+            entrada = input("\nIngrese el texto a analizar: ")
+            # Caso Edge: Evitar procesar si el usuario solo da Enter o espacios
+            if not entrada.strip():
+                print("⚠️ Error: No se ingresó texto válido para analizar.")
+            else:
+                texto_a_analizar = entrada
+                fuente = "Entrada Manual"
         
         elif opcion == "2":
             ruta_usuario = input("\nIngrese la ruta del archivo (ej: textos/ejemplo.txt): ")
             try:
-                # Carga y lee un archivo .txt dado su ruta con manejo de errores
                 texto_a_analizar = leer_archivo(ruta_usuario)
-                fuente = ruta_usuario
+                # Caso Edge: El archivo existe pero está totalmente vacío o solo tiene espacios
+                if not texto_a_analizar or not texto_a_analizar.strip():
+                    print("⚠️ El archivo seleccionado está vacío.")
+                    texto_a_analizar = "" # Reset para no procesar
+                else:
+                    fuente = ruta_usuario
             except FileNotFoundError:
                 print("⚠️ Error: Archivo no encontrado.")
-            except EOFError:
-                print("⚠️ Error: El archivo está vacío.")
-            except ValueError as e:
-                print(f"⚠️ Error de formato: {e}")
             except Exception as e:
                 print(f"⚠️ Error inesperado: {e}")
 
@@ -67,22 +88,18 @@ def menu_principal():
             print("Saliendo del programa...")
             break
         else:
-            print("Opción no válida.")
+            print("❌ Opción no válida.")
         
-        # Si hay texto cargado, procedemos al análisis y guardado
         if texto_a_analizar:
             resultados = realizar_analisis(texto_a_analizar)
             print("\n📊 ESTADÍSTICAS ENCONTRADAS:")
             for clave, valor in resultados.items():
                 print(f"- {clave.replace('_', ' ').capitalize()}: {valor}")
             
-            # Preguntar al usuario si quiere guardar el informe de análisis
             desea_guardar = input("\n¿Desea guardar el informe? (s/n): ").lower()
             if desea_guardar == 's':
-                # Escribir todos los resultados en un archivo informe.txt (incluye fecha, hora y fuente)
                 ruta_confirmada = guardar_informe(resultados, fuente)
                 if ruta_confirmada:
-                    # Confirmar al usuario la ruta donde se ha guardado el archivo
                     print(f"✅ Informe guardado con éxito en: {os.path.abspath(ruta_confirmada)}")
         
         input("\nPresione Enter para continuar...")

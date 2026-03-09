@@ -92,7 +92,7 @@ CONTADOR_PALABRAS/
 │   ├── __init__.py
 │   ├── analizador.py      # Lógica de conteo y procesamiento
 │   ├── exportador.py      # Generación de reportes (CSV, JSON, etc.)
-│   ├── lector.py          # Manejo de apertura de archivos (.txt, .pdf)
+│   ├── lector_archivos.py # Manejo de apertura de archivos (.txt, .pdf)
 │   └── main.py            # Punto de entrada de la aplicación
 ├── tests/                 # Pruebas unitarias e integración
 │   ├── __init__.py

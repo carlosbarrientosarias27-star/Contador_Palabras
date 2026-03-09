@@ -1,52 +1,35 @@
-# Registro de Asistencia de IA - Proyecto Contador de Palabras
+# Registro de Asistencia por IA - Contador de Palabras
+Este documento detalla los prompts y la interacción con modelos de IA utilizados para el diseño, desarrollo y pruebas del proyecto.
 
-Este documento detalla la interacción con la IA para el desarrollo de las pruebas unitarias y la resolución de problemas de estructura del proyecto.
+## 1. Fase de Arquitectura y Estructura
+Prompt:
 
-## 1. Módulo: lector.py
-**Prompt:** "necesito hacer un test.py donde realizar pruebas unitarias de mi carpeta src donde esta mi archivo lector.py"
+"Genera una estructura de archivos para un proyecto de Python llamado 'Contador de Palabras' que siga las buenas prácticas. Debe incluir una carpeta src para la lógica, test para pruebas unitarias con pytest, docs para documentación y una carpeta para archivos de texto de ejemplo."
 
-**Resultado:**
-- Creación de `test/test_lector.py` usando `unittest.mock`.
-- Implementación de simulación de entradas de terminal (`patch('builtins.input')`).
-- Implementación de simulación de archivos (`mock_open`).
+Resultado:
 
-## 2. Módulo: analizador.py
-**Prompt:** "necesito hacer un test.py donde realizar pruebas unitarias de mi carpeta src donde esta mi archivo analizador.py"
+Creación de la jerarquía de carpetas: src/, test/, docs/, textos/.
 
-**Resultado:**
-- Creación de `test/test_analizador.py`.
-- Pruebas para conteo básico, estructuras (oraciones/párrafos) y estadísticas avanzadas.
-- Resolución de error de precisión en `media_longitud` usando `assertAlmostEqual` para manejar decimales como `4.6666...`.
+Inclusión de archivos base: requirements.txt, .gitignore y README.md.
 
-## 3. Módulo: exportador.py
-**Prompt:** "necesito hacer un test.py donde realizar pruebas unitarias de mi carpeta src donde esta mi archivo exportador.py"
+## 2. Desarrollo de Módulos (Lógica Core)
+Prompt:
 
-**Resultado:**
-- Creación de `test/test_exportador.py`.
-- Verificación de la escritura correcta en `informe.txt` sin crear archivos físicos.
-- Validación del manejo de errores cuando no hay permisos de escritura.
+"Escribe el código para src/lector_archivos.py que maneje la lectura de archivos .txt y maneje errores de archivo no encontrado. También, crea src/analizador.py con una función que cuente palabras, ignorando signos de puntuación básicos."
 
-## 4. Módulo: main.py (Orquestador)
-**Prompt:** "necesito hacer un test.py donde realizar pruebas unitarias de mi carpeta src donde esta mi archivo main.py"
+## 3. Pruebas Unitarias
+Prompt:
 
-**Resultado:**
-- Creación de `test/test_main.py`.
-- Pruebas de flujo del menú principal y captura de la salida de consola (`patch('builtins.print')`).
-- Simulación de la opción "Salir" para verificar el cierre correcto del bucle.
+"Basado en los archivos en src/, genera pruebas unitarias utilizando pytest. Crea casos de prueba para test_analizador.py que cubran: cadenas vacías, múltiples espacios y caracteres especiales. Asegúrate de incluir un __init__.py en la carpeta de tests para el manejo de módulos."
 
-## 5. Resolución de Errores Técnicos (Estructura y Rutas)
-**Problema:** `ModuleNotFoundError: No module named 'src'`
-**Prompts de resolución:**
-- "File "...test_lector.py", line 9, in <module> from src.lector import ... ModuleNotFoundError: No module named 'src'"
+## 4. Documentación y Casos de Borde
+Prompt:
 
-**Solución aplicada:**
-1. **Configuración de Path:** Inserción dinámica de la raíz del proyecto en `sys.path` dentro de cada archivo de test.
-2. **Importaciones de Paquete:** Ajuste en `main.py` para usar importaciones absolutas (`from src.lector import...`) en lugar de relativas.
-3. **Paquetes Python:** Creación de archivos `__init__.py` en las carpetas `src/` y `test/` para reconocimiento de módulos.
+"Ayúdame a redactar un documento de 'Casos de Borde' (docs/caso edge.md) para este contador de palabras. ¿Qué debería considerar además de archivos vacíos? (Ej: codificación UTF-8, archivos extremadamente grandes, símbolos matemáticos)."
 
-## 6. Comandos de Ejecución Identificados
-Para ejecutar las pruebas correctamente desde la raíz del proyecto:
-- `python -m unittest test/test_lector.py`
-- `python -m unittest test/test_analizador.py`
-- `python -m unittest test/test_exportador.py`
-- `python -m unittest test/test_main.py`
+# Notas de Implementación
+Modelo utilizado: Gemini.
+
+Uso de herramientas: Generación de código base y plantillas de pruebas.
+
+Revisión humana: El archivo main.py fue ajustado manualmente para integrar todos los módulos y manejar el flujo de usuario por consola.
