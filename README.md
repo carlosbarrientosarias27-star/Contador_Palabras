@@ -38,9 +38,6 @@ git clone https://github.com/tu-usuario/CONTADOR_PALABRAS.git
 ## 2. Entrar al directorio
 cd CONTADOR_PALABRAS
 
-## 3. Instalar dependencias (si aplica)
-pip install -r requirements.txt
-
 ---
 
 ## 🛠️ Uso y Ejemplos de Ejecución
@@ -50,7 +47,6 @@ El punto de entrada principal del programa es src/main.py.
 ## 1. Ejecución Básica
 Para analizar uno de los archivos de texto incluidos en la carpeta texto/:
 
-Bash
 python src/main.py --archivo texto/informe.txt
 
 ## 2. Ejemplo de Salida en Terminal
@@ -73,12 +69,6 @@ Al ejecutar el comando anterior, verás un resumen como este:
 | 2° | "sistema" | 8 veces |
 | 3° | "análisis" | 5 veces |
 
-Si deseas verificar que todos los módulos funcionan correctamente:
-
-Bash
-pytest test/
-
----
 
 ## 📁 Estructura del Proyecto
 
@@ -108,18 +98,6 @@ CONTADOR_PALABRAS/
 ├── README.md              # Descripción general y cómo usar el proyecto
 └── requirements.txt       # Librerías externas necesarias
 ```
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor, abre un *issue* para discutir cambios importantes antes de enviar un *pull request*.
-
-1. Haz un fork del repositorio
-2. Crea una rama: `git checkout -b feature/nueva-funcionalidad`
-3. Realiza tus cambios y haz commit: `git commit -m 'Agrega nueva funcionalidad'`
-4. Sube la rama: `git push origin feature/nueva-funcionalidad`
-5. Abre un Pull Request
 
 ---
 
