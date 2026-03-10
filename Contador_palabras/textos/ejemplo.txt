@@ -1,7 +1,2 @@
 "Python es un lenguaje de programación versátil. Es muy popular en ciencia de 
 datos e IA. Este archivo sirve para probar la carga de archivos externos." 
-
-Línea 1: El análisis de datos es fundamental.
-Línea 2: Python facilita la manipulación de archivos.
-Línea 3: Manejar excepciones evita que el programa falle.
-Línea 4: ¡Prueba de carga exitosa!
