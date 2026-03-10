@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')
 from core.analizador import analizar_texto
 
 class TestAnalizadorTexto(unittest.TestCase):
-
+    """Suite de pruebas para la lógica de análisis estadístico de texto."""
     def test_texto_estandar(self):
         """Verifica el conteo correcto de oraciones, párrafos y longitud de palabras en un texto normal."""
         texto = "Hola mundo. Esto es una prueba.\n\nSegundo párrafo aquí."

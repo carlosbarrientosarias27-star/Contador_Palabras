@@ -4,7 +4,6 @@ import unittest
 from unittest.mock import patch
 import io
 
-# Ajuste de ruta para encontrar la carpeta 'utils'
 ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 if ruta_raiz not in sys.path:
     sys.path.append(ruta_raiz)
@@ -12,9 +11,10 @@ if ruta_raiz not in sys.path:
 from utils.interfaz import formatear_informe, capturar_texto_manual
 
 class TestInterfaz(unittest.TestCase):
+    """Suite de pruebas para los componentes de interacción con el usuario (CLI)."""
 
     def test_formatear_informe_contenido(self):
-        """Verifica que el informe contenga los datos clave del diccionario de stats."""
+        """Verifica que el string generado para el informe contenga los indicadores clave calculados."""
         stats_ejemplo = {
             "oraciones": 2, "parrafos": 1, "total": 10,
             "unicas": 8, "porcentaje_unicas": 80.0, "media": 5.2,
@@ -23,15 +23,14 @@ class TestInterfaz(unittest.TestCase):
         
         resultado = formatear_informe(stats_ejemplo)
         
-        # Comprobamos que los datos importantes aparezcan en el string final
         self.assertIn("RESULTADOS DEL ANÁLISIS", resultado)
-        self.assertIn("10", resultado) # total palabras
-        self.assertIn("computadora", resultado) # palabra más larga
-        self.assertIn("hola: 2 veces", resultado) # top 5
+        self.assertIn("10", resultado) 
+        self.assertIn("computadora", resultado) 
+        self.assertIn("hola: 2 veces", resultado) 
 
     @patch('builtins.input', side_effect=['Esta es una línea', 'Segunda línea', ''])
     def test_capturar_texto_manual_exito(self, mock_input):
-        """Simula a un usuario escribiendo dos líneas y luego presionando Enter."""
+        """Simula la entrada multilínea de un usuario y valida la reconstrucción del texto."""
         resultado = capturar_texto_manual()
         texto_esperado = "Esta es una línea\nSegunda línea"
         
@@ -39,16 +38,15 @@ class TestInterfaz(unittest.TestCase):
 
     @patch('builtins.input', side_effect=[''])
     def test_capturar_texto_manual_vacio(self, mock_input):
-        """Simula a un usuario presionando Enter sin escribir nada."""
+        """Asegura que presionar Enter sin contenido devuelva None."""
         resultado = capturar_texto_manual()
         self.assertIsNone(resultado)
 
     @patch('os.system')
     def test_limpiar_pantalla(self, mock_os):
-        """Verifica que se llame al comando del sistema para limpiar la pantalla."""
+        """Verifica que se invoque el comando del sistema operativo para limpiar la terminal."""
         from utils.interfaz import limpiar_pantalla
         limpiar_pantalla()
-        # Verifica que os.system fue llamado al menos una vez
         mock_os.assert_called()
 
 if __name__ == "__main__":

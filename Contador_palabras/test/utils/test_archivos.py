@@ -4,19 +4,15 @@ import unittest
 import shutil
 import tempfile
 
-# 1. Ajustar el path para que encuentre la carpeta 'utils'
-# Sube dos niveles desde: proyecto/test/utils/test_archivos.py 
-# Hasta la raíz: proyecto/
 ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 if ruta_raiz not in sys.path:
     sys.path.append(ruta_raiz)
 
-# 2. Ahora sí importamos desde utils
 from utils.archivos import cargar_desde_archivo, guardar_informe
-
 
 class TestGestionArchivos(unittest.TestCase):
     """Pruebas para los servicios de lectura y escritura de archivos en disco."""
+
     def setUp(self):
         """Crea un entorno de archivos temporal antes de cada prueba."""
         self.test_dir = tempfile.mkdtemp()
@@ -25,7 +21,6 @@ class TestGestionArchivos(unittest.TestCase):
     def tearDown(self):
         """Elimina el directorio temporal y la carpeta de reportes generada tras cada prueba."""
         shutil.rmtree(self.test_dir)
-        # También limpiamos la carpeta 'reportes' si el test la creó
         if os.path.exists("reportes"):
             shutil.rmtree("reportes")
 
@@ -56,17 +51,12 @@ class TestGestionArchivos(unittest.TestCase):
         informe_dummy = "Contenido del informe"
         fuente_dummy = "datos.txt"
         
-        # Ejecutar función
         guardar_informe(informe_dummy, fuente_dummy)
         
-        # Verificar que la carpeta existe
         self.assertTrue(os.path.exists("reportes"))
-        
-        # Verificar que hay al menos un archivo dentro
         archivos_en_reportes = os.listdir("reportes")
         self.assertGreater(len(archivos_en_reportes), 0)
         
-        # Verificar contenido del último archivo creado
         ruta_ultimo = os.path.join("reportes", archivos_en_reportes[0])
         with open(ruta_ultimo, "r", encoding="utf-8") as f:
             contenido = f.read()
