@@ -1,35 +1,44 @@
-# Registro de Asistencia por IA - Contador de Palabras
-Este documento detalla los prompts y la interacción con modelos de IA utilizados para el diseño, desarrollo y pruebas del proyecto.
+# Registro de Asistencia de Inteligencia Artificial - Contador de Palabras
 
-## 1. Fase de Arquitectura y Estructura
-Prompt:
+Este documento recopila los prompts y la lógica de interacción con la IA para el desarrollo del proyecto **Contador_palabras**.
 
-"Genera una estructura de archivos para un proyecto de Python llamado 'Contador de Palabras' que siga las buenas prácticas. Debe incluir una carpeta src para la lógica, test para pruebas unitarias con pytest, docs para documentación y una carpeta para archivos de texto de ejemplo."
+---
 
-Resultado:
+## 1. Arquitectura del Proyecto
+**Prompt:**
+> "Genera una estructura de carpetas para un proyecto de Python llamado 'Contador_palabras'. Organiza el código en una carpeta 'core' para el análisis de texto, 'utils' para manejo de archivos e interfaz, y una carpeta 'test' que replique esta estructura para pruebas unitarias. Incluye directorios para reportes y documentos."
 
-Creación de la jerarquía de carpetas: src/, test/, docs/, textos/.
+---
 
-Inclusión de archivos base: requirements.txt, .gitignore y README.md.
+## 2. Lógica de Análisis (`core/analizador.py`)
+**Prompt:**
+> "Crea una función en Python que reciba un string y devuelva un diccionario con: el número total de palabras, el número de caracteres (con y sin espacios) y la frecuencia de cada palabra. Ignora mayúsculas y signos de puntuación básicos."
 
-## 2. Desarrollo de Módulos (Lógica Core)
-Prompt:
+---
 
-"Escribe el código para src/lector_archivos.py que maneje la lectura de archivos .txt y maneje errores de archivo no encontrado. También, crea src/analizador.py con una función que cuente palabras, ignorando signos de puntuación básicos."
+## 3. Utilidades y Archivos (`utils/archivos.py` e `interfaz.py`)
+**Prompts:**
+> "Escribe un módulo que lea archivos `.txt` de forma segura y maneje excepciones si el archivo no existe o no tiene permisos de lectura."
+> 
+> "Genera una interfaz de línea de comandos (CLI) simple usando `argparse` que permita al usuario pasar la ruta de un archivo como argumento."
 
-## 3. Pruebas Unitarias
-Prompt:
+---
 
-"Basado en los archivos en src/, genera pruebas unitarias utilizando pytest. Crea casos de prueba para test_analizador.py que cubran: cadenas vacías, múltiples espacios y caracteres especiales. Asegúrate de incluir un __init__.py en la carpeta de tests para el manejo de módulos."
+## 4. Generación de Reportes (`reportes/`)
+**Prompt:**
+> "Crea una función que exporte los resultados del análisis de texto a un archivo `.txt` con un formato limpio. El nombre del archivo debe incluir la fecha y hora actual (timestamp), por ejemplo: 'informe_2026-03-10_10-14-13.txt'."
 
-## 4. Documentación y Casos de Borde
-Prompt:
+---
 
-"Ayúdame a redactar un documento de 'Casos de Borde' (docs/caso edge.md) para este contador de palabras. ¿Qué debería considerar además de archivos vacíos? (Ej: codificación UTF-8, archivos extremadamente grandes, símbolos matemáticos)."
+## 5. Estrategia de Pruebas (`test/`)
+**Prompt:**
+> "Genera casos de prueba con `pytest` para:
+> 1. `test.analizador.py`: Validar el conteo exacto con strings vacíos, palabras repetidas y caracteres especiales.
+> 2. `test_archivos.py`: Simular (mock) la lectura de un archivo para verificar que el contenido se procesa correctamente.
+> 3. `test_main.py`: Probar el flujo completo desde la entrada del usuario hasta la generación del reporte."
 
-# Notas de Implementación
-Modelo utilizado: Gemini.
+---
 
-Uso de herramientas: Generación de código base y plantillas de pruebas.
-
-Revisión humana: El archivo main.py fue ajustado manualmente para integrar todos los módulos y manejar el flujo de usuario por consola.
+## 6. Manejo de Casos Especiales (`docs/caso edge.md`)
+**Prompt:**
+> "¿Qué debería considerar mi contador de palabras al procesar archivos extremadamente grandes o archivos con codificaciones de texto no estándar (como UTF-16 o ISO-8859-1)? Ayúdame a documentar estos casos de borde."

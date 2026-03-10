@@ -1,42 +1,18 @@
 # 🧪 Pruebas de Casos de Borde 
 
-## 1. Texto Vacío
-Qué ingresar: Simplemente presiona Enter cuando el programa pida el texto.
+## 1. Texto vacío ("")
+Es el origen de muchísimos errores de tipo NullPointerException o fallos de segmentación.
 
-Resultado esperado:
+El riesgo: Si tu lógica intenta acceder al primer índice de la cadena (como texto[0]) y la cadena no tiene nada, el programa colapsará.
 
-- total_caracteres: 0
+La prueba: ¿Qué hace tu función si no le pasas nada? Debería retornar un error controlado o un valor neutro, pero nunca cerrarse inesperadamente.
 
-- total_palabras: 0
+## 2. Un solo carácter ("a")
+A veces los algoritmos funcionan bien con grupos de datos, pero fallan en la unidad mínima.
 
-- total_lineas: 0
+El riesgo: Muchos bucles (como los for o while) están diseñados pensando en "empezar en 0 y terminar en N-1". Si la longitud es 1, algunos límites mal configurados podrían saltarse el proceso por completo o intentar buscar un "siguiente elemento" que no existe.
 
-- palabra_mas_larga: "N/A" (Gracias a tu condición if palabras else "N/A").
+## 3. Texto con solo números o símbolos ("12345" / "$%&#")
+Si tu función espera procesar lenguaje humano, los caracteres no alfabéticos son el caso edge perfecto.
 
-Observación: Tu código ya maneja esto correctamente para evitar un ValueError al intentar calcular el max() de una lista vacía.
-
-## 2. Un solo carácter 
-Qué ingresar: Una sola letra (ej: a) o un símbolo (ej: @).
-
-Resultado esperado:
-
-- total_caracteres: 1
-
-- total_palabras: 1
-
-- total_lineas: 1
-
-- palabra_mas_larga: El carácter ingresado.
-
-## 3. Texto con solo números 
-Qué ingresar: 123 4567 89
-
-Resultado esperado:
-
-- total_caracteres: 11 (contando espacios).
-
-- total_palabras: 3
-
-- palabra_mas_larga: 4567
-
-Nota técnica: En Python, los números en un string se tratan como caracteres alfanuméricos. El método .split() no diferencia entre letras y números, por lo que los contará como "palabras" igualmente.
+El riesgo: Si usas funciones de conversión de mayúsculas/minúsculas o intentas calcular una "puntuación" basada en letras, un número podría devolver un valor inesperado o romper la lógica de validación.
