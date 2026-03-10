@@ -1,23 +1,13 @@
-from utils.interfaz import limpiar_pantalla, capturar_texto_manual, formatear_informe
+import sys
+import os
+
+# Fuerza a Python a buscar módulos en el directorio actual
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Ahora las importaciones funcionarán correctamente
+from utils.interfaz import limpiar_pantalla, capturar_texto_manual, formatear_informe 
 from utils.archivos import cargar_desde_archivo, guardar_informe
 from core.analizador import analizar_texto
-
-
-def formatear_informe(stats):
-    """Convierte el diccionario de estadísticas en el texto visual."""
-    res = (
-        f"\n{'='*30}\n RESULTADOS DEL ANÁLISIS\n{'='*30}\n"
-        f"Texto: {stats['oraciones']} oraciones | {stats['parrafos']} párrafos\n"
-        f"Palabras totales: {stats['total']}\n"
-        f"Palabras únicas: {stats['unicas']} ({stats['porcentaje_unicas']:.1f}%)\n"
-        f"Longitud media: {stats['media']:.1f} letras\n"
-        f"Palabra más larga: {stats['p_larga']}\n"
-        f"\nTOP 5 palabras:\n"
-    )
-    for i, (pal, cant) in enumerate(stats['top'], 1):
-        res += f"{i}. {pal}: {cant} {'vez' if cant == 1 else 'veces'}\n"
-    return res
-
 
 def main():
     while True:

@@ -2,3 +2,5 @@ solo biblioteca estándar:
 re, 
 collections, 
 os
+tempfile 
+shutil
