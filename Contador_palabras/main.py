@@ -10,6 +10,7 @@ from utils.archivos import cargar_desde_archivo, guardar_informe
 from core.analizador import analizar_texto
 
 def main():
+    """Punto de entrada principal de la aplicación de análisis de texto."""
     while True:
         limpiar_pantalla()
         print("|| CONTADOR DE PALABRAS OPTIMIZADO ||")

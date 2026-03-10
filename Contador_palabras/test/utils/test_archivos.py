@@ -16,21 +16,21 @@ from utils.archivos import cargar_desde_archivo, guardar_informe
 
 
 class TestGestionArchivos(unittest.TestCase):
-
+    """Pruebas para los servicios de lectura y escritura de archivos en disco."""
     def setUp(self):
-        """Se ejecuta antes de cada test: crea un directorio temporal."""
+        """Crea un entorno de archivos temporal antes de cada prueba."""
         self.test_dir = tempfile.mkdtemp()
         self.archivo_prueba = os.path.join(self.test_dir, "test.txt")
 
     def tearDown(self):
-        """Se ejecuta después de cada test: limpia los archivos creados."""
+        """Elimina el directorio temporal y la carpeta de reportes generada tras cada prueba."""
         shutil.rmtree(self.test_dir)
         # También limpiamos la carpeta 'reportes' si el test la creó
         if os.path.exists("reportes"):
             shutil.rmtree("reportes")
 
     def test_cargar_archivo_existente(self):
-        """Verifica que lee correctamente un archivo con contenido."""
+        """Valida que el contenido de un archivo existente se lea e interprete correctamente."""
         contenido_esperado = "Hola, esto es una prueba unitaria."
         with open(self.archivo_prueba, "w", encoding="utf-8") as f:
             f.write(contenido_esperado)
@@ -39,12 +39,12 @@ class TestGestionArchivos(unittest.TestCase):
         self.assertEqual(resultado, contenido_esperado)
 
     def test_cargar_archivo_inexistente(self):
-        """Verifica que devuelve None si el archivo no existe (Commit 7)."""
+        """Asegura que el sistema retorne None de forma controlada si el archivo no existe."""
         resultado = cargar_desde_archivo("ruta/falsa/archivo.txt")
         self.assertIsNone(resultado)
 
     def test_cargar_archivo_vacio(self):
-        """Verifica que devuelve None si el archivo solo tiene espacios o está vacío."""
+        """Verifica que archivos compuestos solo por espacios en blanco sean tratados como nulos."""
         with open(self.archivo_prueba, "w", encoding="utf-8") as f:
             f.write("   \n  ")
         
@@ -52,7 +52,7 @@ class TestGestionArchivos(unittest.TestCase):
         self.assertIsNone(resultado)
 
     def test_guardar_informe_crea_archivo(self):
-        """Verifica que la carpeta 'reportes' y el archivo se crean correctamente."""
+        """Valida la creación automática de la carpeta de reportes y la integridad del archivo guardado."""
         informe_dummy = "Contenido del informe"
         fuente_dummy = "datos.txt"
         

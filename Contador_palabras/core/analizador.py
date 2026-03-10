@@ -2,7 +2,13 @@ import re
 from collections import Counter
 
 def analizar_texto(texto):
-    """Realiza el análisis estadístico manejando casos borde."""
+    """
+    Realiza un análisis estadístico exhaustivo del texto proporcionado.
+
+    Calcula métricas como conteo de oraciones, párrafos, palabras totales, 
+    palabras únicas, longitud media y las palabras más frecuentes (Top 5).
+    Maneja casos de error como textos vacíos o compuestos solo por números.
+    """
     # 1. Limpieza y Normalización
     palabras_totales = texto.split()
     total_palabras = len(palabras_totales)

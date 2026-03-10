@@ -10,7 +10,7 @@ from core.analizador import analizar_texto
 class TestAnalizadorTexto(unittest.TestCase):
 
     def test_texto_estandar(self):
-        """Prueba un texto normal con oraciones y párrafos."""
+        """Verifica el conteo correcto de oraciones, párrafos y longitud de palabras en un texto normal."""
         texto = "Hola mundo. Esto es una prueba.\n\nSegundo párrafo aquí."
         resultado = analizar_texto(texto)
         self.assertEqual(resultado["oraciones"], 3)
@@ -18,20 +18,20 @@ class TestAnalizadorTexto(unittest.TestCase):
         self.assertEqual(len(resultado["p_larga"]), 7)
 
     def test_texto_vacio(self):
-        """Verifica que el sistema no explote con strings vacíos."""
+        """Asegura que el analizador retorne valores iniciales seguros ante un string vacío."""
         resultado = analizar_texto("")
         self.assertEqual(resultado["total"], 0)
         self.assertEqual(resultado["oraciones"], 0)
         self.assertEqual(resultado["p_larga"], "-")
 
     def test_solo_numeros(self):
-        """Verifica el manejo de texto que no contiene palabras (solo dígitos)."""
+        """Valida que los números puros no se contabilicen como palabras únicas o alfabéticas."""
         resultado = analizar_texto("123 456 789")
         self.assertEqual(resultado["unicas"], 0)
         self.assertEqual(resultado["p_larga"], "-")
 
     def test_stop_words_filtro(self):
-        """Asegura que las stop_words no aparezcan en el top 5."""
+        """Verifica que las palabras funcionales (stop words) se excluyan del ranking de las más frecuentes."""
         texto = "el sol la luna el sol el sol"
         resultado = analizar_texto(texto)
         palabras_en_top = [word for word, count in resultado["top"]]
@@ -39,7 +39,7 @@ class TestAnalizadorTexto(unittest.TestCase):
         self.assertIn("sol", palabras_en_top)
 
     def test_porcentaje_unicas(self):
-        """Valida el cálculo matemático de palabras únicas."""
+        """Comprueba que el cálculo del porcentaje de palabras únicas sobre el total sea matemáticamente preciso."""
         texto = "hola hola adiós"
         resultado = analizar_texto(texto)
         self.assertAlmostEqual(resultado["porcentaje_unicas"], 66.6666666, places=2)

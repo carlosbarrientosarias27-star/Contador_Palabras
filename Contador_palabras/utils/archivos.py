@@ -3,7 +3,10 @@ from datetime import datetime
 
 def cargar_desde_archivo(ruta):
     """
-    Carga y lee un archivo .txt manejando errores de ruta (Commit 7).
+    Lee el contenido de un archivo de texto en la ruta especificada.
+
+    Retorna el contenido como string si el archivo existe y no está vacío, 
+    de lo contrario retorna None. Maneja errores de lectura silenciosamente.
     """
     try:
         if not os.path.exists(ruta): 
@@ -16,7 +19,10 @@ def cargar_desde_archivo(ruta):
 
 def guardar_informe(informe, fuente):
     """
-    Guarda el informe en la carpeta 'reportes' con marca de tiempo.
+    Exporta el informe generado a un archivo físico en el directorio 'reportes'.
+
+    Crea el directorio si no existe y genera un nombre de archivo único 
+    basado en la fecha y hora actual (ISO 8601).
     """
     # 1. Definir el nombre de la carpeta
     carpeta_reportes = "reportes"
@@ -28,15 +34,15 @@ def guardar_informe(informe, fuente):
     # 3. Generar el nombre del archivo y la ruta completa
     ahora = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     nombre_archivo = f"informe_{ahora}.txt"
-    ruta_destino = os.path.join(carpeta_reportes, nombre_archivo)
+    ruta_Contador_palabras = os.path.join(carpeta_reportes, nombre_archivo)
     
     # 4. Escribir el archivo (Commit 8)
     try:
-        with open(ruta_destino, "w", encoding="utf-8") as f:
+        with open(ruta_Contador_palabras, "w", encoding="utf-8") as f:
             f.write(f"INFORME GENERADO EL: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"FUENTE DE DATOS: {fuente}\n")
             f.write("-" * 30 + "\n")
             f.write(informe)
-        print(f"\n[OK] Informe guardado exitosamente en: {ruta_destino}")
+        print(f"\n[OK] Informe guardado exitosamente en: {ruta_Contador_palabras}")
     except Exception as e:
         print(f"\n[Error] No se pudo guardar el informe: {e}")

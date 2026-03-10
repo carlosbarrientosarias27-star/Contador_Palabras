@@ -1,11 +1,16 @@
 import os
 
 def limpiar_pantalla():
-    """Limpia la terminal según el sistema operativo."""
+    """Limpia la consola del usuario detectando el sistema operativo subyacente."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def capturar_texto_manual():
-    """Captura texto del usuario hasta una línea vacía."""
+    """
+    Solicita al usuario la entrada de texto multilínea por consola.
+
+    Continúa capturando líneas hasta que el usuario introduce una línea vacía.
+    Retorna el texto unido por saltos de línea o None si no hubo entrada.
+    """
     print("\nEscribe tu texto (deja una línea vacía para terminar):")
     lineas = []
     while True:
@@ -16,8 +21,10 @@ def capturar_texto_manual():
 
 def formatear_informe(stats):
     """
-    Recibe el diccionario 'stats' generado por el analizador 
-    y lo convierte en un texto visual para el usuario.
+    Transforma el diccionario de estadísticas en una cadena de texto legible.
+
+    Aplica formato decimal a porcentajes y promedios, e itera sobre el 
+    Top 5 de palabras para generar una lista numerada visual.
     """
     res = (
         f"\n{'='*30}\n RESULTADOS DEL ANÁLISIS\n{'='*30}\n"
