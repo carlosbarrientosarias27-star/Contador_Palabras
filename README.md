@@ -1,6 +1,6 @@
 # 📝 Contador de Palabras
 
-Aplicación de escritorio en Python para el análisis lingüístico de textos: conteo de palabras, frecuencias, estadísticas y generación de reportes. Incluye una interfaz gráfica intuitiva y un módulo analizador de alto rendimiento.
+Aplicación de contador de palabras de textos: conteo de palabras, frecuencias, estadísticas y generación de reportes. Incluye una interfaz gráfica intuitiva y un módulo analizador de alto rendimiento.
 
 ---
 
