@@ -1,44 +1,46 @@
-# Registro de Asistencia de Inteligencia Artificial - Contador de Palabras
+# Registro de Asistencia de IA - Proyecto Contador_palabras
 
-Este documento recopila los prompts y la lógica de interacción con la IA para el desarrollo del proyecto **Contador_palabras**.
-
----
-
-## 1. Arquitectura del Proyecto
-**Prompt:**
-> "Genera una estructura de carpetas para un proyecto de Python llamado 'Contador_palabras'. Organiza el código en una carpeta 'core' para el análisis de texto, 'utils' para manejo de archivos e interfaz, y una carpeta 'test' que replique esta estructura para pruebas unitarias. Incluye directorios para reportes y documentos."
+Este documento detalla la metodología y los prompts utilizados durante el desarrollo del proyecto para garantizar la transparencia en el uso de herramientas de Inteligencia Artificial.
 
 ---
 
-## 2. Lógica de Análisis (`core/analizador.py`)
-**Prompt:**
-> "Crea una función en Python que reciba un string y devuelva un diccionario con: el número total de palabras, el número de caracteres (con y sin espacios) y la frecuencia de cada palabra. Ignora mayúsculas y signos de puntuación básicos."
+# 1. Diseño de Arquitectura y Estructura
+**Objetivo:** Definir la jerarquía de carpetas y la modularización del código.
+
+* **Prompt:** > "Actúa como un arquitecto de software senior. Diseña una estructura de proyecto en Python para una herramienta de conteo de palabras que sea modular. Debe incluir carpetas para código fuente (`src`), pruebas (`test`), documentación (`docs`) y manejo de archivos de texto (`textos`). Asegúrate de seguir las buenas prácticas de Python (PEP 8)."
 
 ---
 
-## 3. Utilidades y Archivos (`utils/archivos.py` e `interfaz.py`)
-**Prompts:**
-> "Escribe un módulo que lea archivos `.txt` de forma segura y maneje excepciones si el archivo no existe o no tiene permisos de lectura."
-> 
-> "Genera una interfaz de línea de comandos (CLI) simple usando `argparse` que permita al usuario pasar la ruta de un archivo como argumento."
+# 2. Desarrollo de Módulos Core (`src/`)
+**Objetivo:** Implementar la lógica de procesamiento y utilidades.
+
+* **Módulo `procesador.py`:**
+    > "Genera una función en Python que reciba un string y devuelva un diccionario con la frecuencia de cada palabra, ignorando mayúsculas/minúsculas y eliminando signos de puntuación básicos."
+* **Módulo `entrada.py`:**
+    > "Crea una función para leer archivos .txt de forma segura, manejando excepciones en caso de que el archivo no exista o esté vacío."
 
 ---
 
-## 4. Generación de Reportes (`reportes/`)
-**Prompt:**
-> "Crea una función que exporte los resultados del análisis de texto a un archivo `.txt` con un formato limpio. El nombre del archivo debe incluir la fecha y hora actual (timestamp), por ejemplo: 'informe_2026-03-10_10-14-13.txt'."
+# 3. Estrategia de Testing (`test/`)
+**Objetivo:** Asegurar la calidad del código mediante pruebas unitarias.
+
+* **Prompt para `test_procesador.py`:**
+    > "Usando la librería `unittest`, escribe pruebas para un procesador de palabras. Incluye casos para: strings vacíos, palabras repetidas, y mezcla de caracteres especiales."
+* **Prompt para `caso edge.md`:**
+    > "Identifica posibles casos de borde (edge cases) para un contador de palabras que lee archivos externos, como archivos con codificación distinta a UTF-8 o archivos extremadamente grandes."
 
 ---
 
-## 5. Estrategia de Pruebas (`test/`)
-**Prompt:**
-> "Genera casos de prueba con `pytest` para:
-> 1. `test.analizador.py`: Validar el conteo exacto con strings vacíos, palabras repetidas y caracteres especiales.
-> 2. `test_archivos.py`: Simular (mock) la lectura de un archivo para verificar que el contenido se procesa correctamente.
-> 3. `test_main.py`: Probar el flujo completo desde la entrada del usuario hasta la generación del reporte."
+# 4. Documentación y DevOps
+**Objetivo:** Preparar el proyecto para su distribución y mantenimiento.
+
+* **Prompt para `.gitignore`:**
+    > "Genera un archivo .gitignore estándar para un proyecto de Python, asegurándote de incluir carpetas de cache como `__pycache__` y entornos virtuales."
+* **Prompt para `requirements.txt`:**
+    > "Analiza la estructura del proyecto y sugiere las dependencias mínimas necesarias si solo uso la biblioteca estándar y unittest."
 
 ---
 
-## 6. Manejo de Casos Especiales (`docs/caso edge.md`)
-**Prompt:**
-> "¿Qué debería considerar mi contador de palabras al procesar archivos extremadamente grandes o archivos con codificaciones de texto no estándar (como UTF-16 o ISO-8859-1)? Ayúdame a documentar estos casos de borde."
+# Resumen de Herramientas
+* **Modelo IA:** Gemini 3 Flash / GPT-4 (según corresponda).
+* **Uso principal:** Refactorización de código, generación de pruebas unitarias y estructuración de documentación técnica.

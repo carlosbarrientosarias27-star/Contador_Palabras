@@ -1,48 +1,52 @@
+import unittest
+from unittest.mock import patch, mock_open
 import sys
 import os
-import unittest 
 
-# Añade la carpeta raíz del proyecto al path de búsqueda
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+# Ajuste de ruta para encontrar la carpeta src
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from core.analizador import analizar_texto
+from src.entrada import capturar_texto_manual, cargar_desde_archivo
 
-class TestAnalizadorTexto(unittest.TestCase):
-    """Suite de pruebas para la lógica de análisis estadístico de texto."""
-    def test_texto_estandar(self):
-        """Verifica el conteo correcto de oraciones, párrafos y longitud de palabras en un texto normal."""
-        texto = "Hola mundo. Esto es una prueba.\n\nSegundo párrafo aquí."
-        resultado = analizar_texto(texto)
-        self.assertEqual(resultado["oraciones"], 3)
-        self.assertEqual(resultado["parrafos"], 2)
-        self.assertEqual(len(resultado["p_larga"]), 7)
+class TestEntrada(unittest.TestCase):
 
-    def test_texto_vacio(self):
-        """Asegura que el analizador retorne valores iniciales seguros ante un string vacío."""
-        resultado = analizar_texto("")
-        self.assertEqual(resultado["total"], 0)
-        self.assertEqual(resultado["oraciones"], 0)
-        self.assertEqual(resultado["p_larga"], "-")
+    # --- Pruebas para capturar_texto_manual ---
 
-    def test_solo_numeros(self):
-        """Valida que los números puros no se contabilicen como palabras únicas o alfabéticas."""
-        resultado = analizar_texto("123 456 789")
-        self.assertEqual(resultado["unicas"], 0)
-        self.assertEqual(resultado["p_larga"], "-")
+    @patch('builtins.input', side_effect=["Hola", "Mundo", ""])
+    def test_capturar_texto_manual_exito(self, mock_input):
+        """Verifica que se capturen varias líneas hasta encontrar una vacía."""
+        resultado = capturar_texto_manual()
+        self.assertEqual(resultado, "Hola\nMundo")
+        self.assertEqual(mock_input.call_count, 3)
 
-    def test_stop_words_filtro(self):
-        """Verifica que las palabras funcionales (stop words) se excluyan del ranking de las más frecuentes."""
-        texto = "el sol la luna el sol el sol"
-        resultado = analizar_texto(texto)
-        palabras_en_top = [word for word, count in resultado["top"]]
-        self.assertNotIn("el", palabras_en_top)
-        self.assertIn("sol", palabras_en_top)
+    @patch('builtins.input', return_value="")
+    def test_capturar_texto_manual_vacio(self, mock_input):
+        """Verifica que devuelva None si no se introduce texto."""
+        resultado = capturar_texto_manual()
+        self.assertIsNone(resultado)
 
-    def test_porcentaje_unicas(self):
-        """Comprueba que el cálculo del porcentaje de palabras únicas sobre el total sea matemáticamente preciso."""
-        texto = "hola hola adiós"
-        resultado = analizar_texto(texto)
-        self.assertAlmostEqual(resultado["porcentaje_unicas"], 66.6666666, places=2)
+    # --- Pruebas para cargar_desde_archivo ---
+
+    @patch('os.path.exists', return_value=True)
+    def test_cargar_desde_archivo_exito(self, mock_exists):
+        """Simula la lectura de un archivo con contenido."""
+        contenido_falso = "Texto del archivo"
+        with patch("builtins.open", mock_open(read_data=contenido_falso)):
+            resultado = cargar_desde_archivo("ruta/test.txt")
+            self.assertEqual(resultado, contenido_falso)
+
+    @patch('os.path.exists', return_value=False)
+    def test_cargar_desde_archivo_no_existe(self, mock_exists):
+        """Verifica el error si el archivo no existe."""
+        resultado = cargar_desde_archivo("fantasma.txt")
+        self.assertIsNone(resultado)
+
+    @patch('os.path.exists', return_value=True)
+    def test_cargar_desde_archivo_vacio(self, mock_exists):
+        """Verifica el error si el archivo existe pero no tiene contenido."""
+        with patch("builtins.open", mock_open(read_data="   ")):
+            resultado = cargar_desde_archivo("vacio.txt")
+            self.assertIsNone(resultado)
 
 if __name__ == '__main__':
     unittest.main()
