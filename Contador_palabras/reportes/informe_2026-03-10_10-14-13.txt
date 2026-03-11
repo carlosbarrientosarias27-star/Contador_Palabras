@@ -1,0 +1,15 @@
+INFORME GENERADO EL: 2026-03-10 10:14:13
+FUENTE DE DATOS: Entrada manual
+------------------------------
+
+==============================
+ RESULTADOS DEL ANÁLISIS
+==============================
+Texto: 1 oraciones | 1 párrafos
+Palabras totales: 1
+Palabras únicas: 1 (100.0%)
+Longitud media: 11.0 letras
+Palabra más larga: futbolistas
+
+TOP 5 palabras:
+1. futbolistas: 1 vez
