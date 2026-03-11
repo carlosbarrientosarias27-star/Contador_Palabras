@@ -3,7 +3,16 @@ from collections import Counter
 
 def analizar_texto(texto):
     """
-    Realiza el análisis estadístico del texto aplicando SRP.
+    Realiza un análisis estadístico y lingüístico exhaustivo del texto.
+
+    Calcula métricas como total de palabras, oraciones, párrafos, 
+    caracteres y frecuencia de términos, retornando un informe formateado.
+
+    Args:
+        texto (str): La cadena de texto que se desea procesar.
+
+    Returns:
+        str: Un informe detallado con los resultados del análisis.
     """
     # 1. Palabras y Caracteres
     palabras_totales = texto.split() 
@@ -27,10 +36,8 @@ def analizar_texto(texto):
     p_larga = max(palabras_limpias, key=len) if palabras_limpias else "-"
     p_corta = min(palabras_limpias, key=len) if palabras_limpias else "-"
 
-    # --- CORRECCIÓN DEL ZERO-DIVISION ERROR ---
     porcentaje_unicas = (len(unicas) / total_palabras) * 100 if total_palabras > 0 else 0
 
-    # Construcción del informe formateado
     res = (
         f"\n{'='*30}\n RESULTADOS DEL ANÁLISIS\n{'='*30}\n"
         f"Texto analizado: {len(oraciones)} oraciones | {len(parrafos)} párrafos\n"

@@ -2,8 +2,13 @@ import os
 
 def capturar_texto_manual():
     """
-    Pide al usuario que introduzca un texto en la terminal.
-    Permite varias líneas usando una línea vacía como delimitador (Commit 2)[cite: 53, 54].
+    Captura texto multilínea introducido manualmente por el usuario.
+
+    Permite al usuario escribir varias líneas en la terminal, finalizando
+    la captura al introducir una línea vacía.
+    
+    Returns:
+        str: El texto completo unido por saltos de línea, o None si está vacío.
     """
     print("\nEscribe tu texto (deja una línea vacía para terminar):")
     lineas = []
@@ -14,14 +19,23 @@ def capturar_texto_manual():
         lineas.append(linea)
     
     texto = "\n".join(lineas)
-    if not texto.strip(): # Manejo de caso sin texto (Commit 2) [cite: 56]
+    if not texto.strip():
         print("Error: No has introducido ningún texto.")
         return None
     return texto
 
 def cargar_desde_archivo(ruta):
     """
-    Carga y lee un archivo .txt manejando errores de ruta o contenido (Commit 7)[cite: 116, 118].
+    Carga y lee el contenido de un archivo de texto plano.
+
+    Verifica la existencia del archivo y maneja posibles errores de lectura
+    o archivos vacíos.
+
+    Args:
+        ruta (str): La ubicación relativa o absoluta del archivo .txt.
+
+    Returns:
+        str: El contenido del archivo como cadena de texto, o None si hay error.
     """
     try:
         if not os.path.exists(ruta):
