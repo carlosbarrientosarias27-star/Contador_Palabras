@@ -12,6 +12,6 @@ def guardar_resultados(informe, fuente):
     opcion = input("\n¿Guardar informe? (s/n): ").lower()
     if opcion == 's':
         ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open("informe.txt", "w", encoding="utf-8") as f:
+        with open("info_analisis/informe.txt", "w", encoding="utf-8") as f:
             f.write(f"INFORME - {ahora}\nFuente: {fuente}\n{informe}")
         print("Informe guardado en informe.txt")
