@@ -1,41 +1,37 @@
-import sys
-import os
-
-# Fuerza a Python a buscar módulos en el directorio actual
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-# Ahora las importaciones funcionarán correctamente
-from utils.interfaz import limpiar_pantalla, capturar_texto_manual, formatear_informe 
-from utils.archivos import cargar_desde_archivo, guardar_informe
-from core.analizador import analizar_texto
+from src.utilidades import limpiar_pantalla, guardar_resultados
+from src.entrada import capturar_texto_manual,cargar_desde_archivo 
+from src.procesador import analizar_texto 
 
 def main():
-    """Punto de entrada principal de la aplicación de análisis de texto."""
+    """
+    Bucle principal con el menú interactivo (Commit 9)[cite: 140, 142].
+    """
     while True:
         limpiar_pantalla()
-        print("|| CONTADOR DE PALABRAS OPTIMIZADO ||")
-        print("1. Manual | 2. Archivo | 3. Salir")
+        print("|| CONTADOR DE PALABRAS DE UN TEXTO ||")
+        print("1. Introducir texto manualmente")
+        print("2. Cargar desde archivo .txt")
+        print("3. Salir")
         
-        opc = input("\nOpción: ")
+        opc = input("\nElige una opción: ")
         texto, fuente = None, ""
 
         if opc == '1':
             texto = capturar_texto_manual()
             fuente = "Entrada manual"
         elif opc == '2':
-            ruta = input("Ruta: ")
+            ruta = input("Ruta del archivo (ej: textos/ejemplo.txt): ")
             texto = cargar_desde_archivo(ruta)
             fuente = ruta
-        elif opc == '3': break
+        elif opc == '3':
+            print("Saliendo del programa...")
+            break
         
         if texto:
-            stats = analizar_texto(texto)
-            informe_texto = formatear_informe(stats)
-            print(informe_texto)
-            
-            if input("¿Guardar? (s/n): ").lower() == 's':
-                guardar_informe(informe_texto, fuente)
-            input("\nPresiona Enter...")
+            resultado = analizar_texto(texto)
+            print(resultado)
+            guardar_resultados(resultado, fuente)
+            input("\nPresiona Enter para continuar...")
 
 if __name__ == "__main__":
     main()

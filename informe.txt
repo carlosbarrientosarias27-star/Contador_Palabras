@@ -1,0 +1,17 @@
+INFORME - 2026-03-11 16:53:43
+Fuente: Entrada manual
+
+==============================
+ RESULTADOS DEL ANÁLISIS
+==============================
+Texto analizado: 1 oraciones | 1 párrafos
+Palabras totales: 1
+Caracteres (con espacios): 13
+Caracteres (sin espacios): 13
+Palabras únicas: 1 (100.0% del total)
+Longitud media de palabra: 13.0 letras
+Palabra más larga: transformador
+Palabra más corta: transformador
+
+TOP 5 palabras más frecuentes:
+1. transformador: 1 vez
