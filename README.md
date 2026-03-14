@@ -109,10 +109,6 @@ print(resultado)
 
 # 📄 Licencia
 
-Este proyecto está bajo la licencia especificada en el archivo [`LICENSE`](Contador_palabras/LICENSE).
+Este proyecto está bajo la licencia especificada en el archivo [`LICENSE`](Contador_palabras/LICENSE MIT).
 
 ---
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor, abre un *issue* o un *pull request* con tus sugerencias o mejoras.
