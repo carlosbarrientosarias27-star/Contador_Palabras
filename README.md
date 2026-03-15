@@ -1,114 +1,116 @@
-# 📦 Repositorio: Contador_palabras & Proyecto de Prueba
+# Contador de Palabras
 
-Este repositorio contiene dos proyectos Python relacionados: **Contador_palabras**, una aplicación modular para el procesamiento y conteo de texto, y **Proyecto de Prueba**, un módulo auxiliar de apoyo.
+Aplicación en Python para el análisis y conteo de palabras en textos, con una suite de pruebas unitarias integrada.
 
 ---
 
-# 📁 Estructura del Repositorio
+# 📁 Estructura del Proyecto
 
 ```
-raíz/
-├── Contador_palabras/
+Contador_palabras/
+├── docs/
+│   ├── asistencia_ia.md
+│   └── caso edge.md
+├── src/
+│   ├── __init__.py
+│   ├── entrada.py
+│   ├── procesador.py
+│   └── utilidades.py
+├── test/
 │   ├── src/
 │   │   ├── __init__.py
-│   │   ├── entrada.py
-│   │   ├── procesador.py
-│   │   └── utilidades.py
-│   ├── test/
-│   │   ├── src/
-│   │   │   ├── __init__.py
-│   │   │   ├── test_entrada.py
-│   │   │   ├── test_procesador.py
-│   │   │   └── test_utilidades.py
-│   │   ├── __init__.py
-│   │   └── test_main.py
-│   ├── textos/
-│   │   └── ejemplo.txt
-│   ├── docs/
+│   │   ├── test_entrada.py
+│   │   ├── test_procesador.py
+│   │   └── test_utilidades.py
 │   ├── __init__.py
-│   ├── .gitignore
-│   ├── LICENSE
-│   ├── main.py
-│   ├── README.md
-│   └── requirements.txt
-│
-└── Proyecto de Prueba/
-    ├── __init__.py
-    ├── Contador.py
-    └── readme.md
+│   └── test_main.py
+├── textos/
+│   └── ejemplo.txt
+├── __init__.py
+├── .gitignore
+├── LICENSE
+├── main.py
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
-# 🔡 Contador_palabras
+## 🧩 Módulos principales (`src/`)
 
-## Descripción
-
-**Contador_palabras** es una aplicación Python modular diseñada para leer, procesar y analizar texto. Permite contar palabras, frecuencias u otras métricas textuales a partir de archivos de entrada.
-
-## Módulos principales (`src/`)
-
-| Módulo | Descripción |
+| Archivo | Descripción |
 |---|---|
-| `entrada.py` | Gestiona la lectura y validación de los archivos de texto de entrada. |
-| `procesador.py` | Contiene la lógica central de procesamiento y análisis del texto. |
-| `utilidades.py` | Funciones de apoyo reutilizables (limpieza, normalización, etc.). |
+| `entrada.py` | Gestión y lectura de la entrada de texto (archivo o texto directo) |
+| `procesador.py` | Lógica central de procesamiento y conteo de palabras |
+| `utilidades.py` | Funciones auxiliares y helpers del proyecto |
 
-## Archivos de texto (`textos/`)
+---
 
-- `ejemplo.txt` — Archivo de muestra utilizado para pruebas y demostración.
+## 🧪 Tests (`test/`)
 
-## Tests (`test/`)
+| Archivo | Descripción |
+|---|---|
+| `test_entrada.py` | Pruebas unitarias del módulo de entrada |
+| `test_procesador.py` | Pruebas unitarias del procesador de palabras |
+| `test_utilidades.py` | Pruebas unitarias de las utilidades |
+| `test_main.py` | Pruebas de integración del flujo principal |
 
-Las pruebas unitarias están organizadas en `test/src/` y cubren los tres módulos principales:
+---
 
-- `test_entrada.py`
-- `test_procesador.py`
-- `test_utilidades.py`
-- `test_main.py` — Prueba de integración del flujo completo.
+# 📂 Proyecto de Prueba
+
+Proyecto auxiliar de demostración que integra y valida el funcionamiento del contador de palabras.
+
+```
+Proyecto de Prueba/
+├── __init__.py
+├── Contador.py
+└── readme.md
+```
+
+| Archivo | Descripción |
+|---|---|
+| `Contador.py` | Implementación de prueba que consume la lógica de `Contador_palabras` |
+
+---
+
+# 🚀 Instalación y uso
+
+## Prerrequisitos
+
+- Python 3.14
+
+## Instalación
+
+```
+git clone <url-del-repositorio>
+cd Contador_palabras
+pip install -r requirements.txt
+```
 
 ## Ejecución
 
 ```
-# Ejecutar la aplicación
 python main.py
+```
 
----
+## Ejecutar los tests
 
-# 🧪 Proyecto de Prueba
-
-## Descripción
-
-**Proyecto de Prueba** es un módulo complementario que incluye una implementación independiente de un contador (`Contador.py`), útil para pruebas aisladas o como referencia de integración con `Contador_palabras`.
-
-## Archivos
-
-| Archivo | Descripción |
-|---|---|
-| `__init__.py` | Inicializa el módulo Python. |
-| `Contador.py` | Implementación del contador de palabras en formato simplificado. |
-| `readme.md` | Documentación específica del proyecto de prueba. |
-
-## Uso básico
-
-```python
-from Contador import Contador
-
-c = Contador()
-resultado = c.contar("Hola mundo, esto es una prueba")
-print(resultado)
+```
+python -m pytest test/
 ```
 
 ---
 
-# ⚙️ Requisitos generales
+# 📄 Documentación
 
-- Python 3.14
+En la carpeta `docs/` se encuentran:
 
----
-
-# 📄 Licencia
-
-Este proyecto está bajo la licencia especificada en el archivo [`LICENSE`](Contador_palabras/LICENSE MIT).
+- **`asistencia_ia.md`** — Notas sobre el uso de IA como asistencia en el desarrollo.
+- **`caso edge.md`** — Descripción y manejo de casos límite contemplados en el procesador.
 
 ---
+
+# 📝 Licencia
+
+Este proyecto está bajo la licencia especificada en el archivo [LICENSE](LICENSE MIT).
